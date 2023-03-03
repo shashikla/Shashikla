@@ -1,0 +1,49 @@
+#img_bg{
+    background-repeat: no-repeat;
+    position: relative;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    overflow-y: hidden !important; 
+}
+
+.heading{
+    position: absolute;
+}
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  .centered {
+    position: absolute;
+    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .centered h1{
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+  }
+  .centered button{
+    padding: 15px 40px;
+    font-size: 20px;
+    color: #2596be;
+    box-sizing: border-box;
+    letter-spacing: 3px;
+    font-family: 'Bebas Neue', cursive;
+  }
+  .centered button:hover{
+    font-size: 25px;
+    box-sizing: border-box;
+
+    color: rgb(37, 150, 190);
+  }
+  .mid-content{
+    display: block;
+    flex-direction: column;
+  }

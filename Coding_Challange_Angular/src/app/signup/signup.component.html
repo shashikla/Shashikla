@@ -1,0 +1,161 @@
+<ng-container>
+
+    <div class="signup-card">
+        <mat-grid-list cols="2" rowHeight="1:1">
+            <mat-grid-tile>
+                <img src="../../assets/coding.png" alt="">
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-card class="_card">
+                    <h1 class="text-center">Sign-Up</h1>
+                    <div class="signup_form">
+                        <form #signupForm="ngForm" [formGroup]="addUserForm" (ngSubmit)="saveUser(signupForm.value)">
+                            <p>
+                                <mat-form-field>
+                                    <mat-label>Full Name</mat-label>
+                                    <input matInput placeholder="John Doe" formControlName="username">
+                                    <mat-icon matSuffix>person_add</mat-icon>
+
+                                    <mat-error *ngIf="this.addUserForm.controls.username.hasError('required') 
+                                && this.addUserForm.controls.username.invalid 
+                                && (this.addUserForm.controls.username.dirty 
+                                || this.addUserForm.controls.username.touched)">
+                                        Name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </p>
+                            <p>
+                                <!-- formControlName="email" -->
+                                <mat-form-field>
+                                    <mat-label>Email</mat-label>
+                                    <input matInput type="email" placeholder="Enter email" formControlName="email">
+                                    <mat-icon matSuffix>mail</mat-icon>
+                                    <mat-error
+                                        *ngIf="this.addUserForm.controls.email?.['email'] || this.addUserForm.controls.email.dirty">
+                                        Please enter a valid email address
+                                    </mat-error>
+                                    <mat-error *ngIf="this.addUserForm.controls.email.hasError('required') 
+                                  && this.addUserForm.controls.email.invalid 
+                                  && (this.addUserForm.controls.email.dirty 
+                                  || this.addUserForm.controls.email.touched)">
+                                        Email is <strong>required</strong>
+                                    </mat-error>
+
+                                    <!-- <mat-error *ngIf="email.invalid">{{getError()}}</mat-error> -->
+                                    <!-- <mat-hint>Hint</mat-hint> -->
+                                </mat-form-field>
+                            </p>
+                            <p>
+                                <mat-form-field>
+                                    <mat-label>Date of Birth</mat-label>
+                                    <input matInput type="date" formControlName="dob" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }">
+                                    <!-- <mat-icon matSuffix><span class="material-symbols-outlined">
+                                            calendar_month
+                                        </span></mat-icon> -->
+                                        <mat-error *ngIf="(this.addUserForm.controls.dob.hasError('required')) 
+                                        && (this.addUserForm.controls.dob.dirty 
+                                        || this.addUserForm.controls.dob.touched) ">
+                                            Date is Required
+                                        </mat-error>
+                                        
+                                         <mat-error *ngIf="this.addUserForm.controls.dob.errors?.ageLimit">
+                                            Age should be greater than 13
+                                        </mat-error>
+                                        
+                                        <!-- <div *ngIf="f.dob.errors" class="invalid-feedback">
+                                            <div *ngIf="f.dob.errors.required">Date of Birth is required</div>
+                                            <div *ngIf="f.dob.errors.pattern">Date of Birth must be a valid date in the format YYYY-MM-DD</div>
+                                        </div> -->
+                                    <!-- <mat-error *ngIf="this.addUserForm.controls.dob.errors?.ageLimit 
+                                    && (this.addUserForm.controls.dob.dirty || 
+                                    this.addUserForm.controls.dob.touched)">
+                                        Age should be greater than 13
+                                    </mat-error>
+                                    <mat-error *ngIf="this.addUserForm.controls.dob.errors?.required
+                                      && this.addUserForm.controls.dob.invalid && (this.addUserForm.controls.dob.dirty 
+                                      || this.addUserForm.controls.dob.touched)">
+                                        Date is required
+                                    </mat-error> -->
+
+                                </mat-form-field>
+                                <!-- <mat-form-field appearance="fill" class="example-form-field" >
+                                    <mat-label>Choose a date</mat-label>
+                                    <input matInput [matDatepicker]="datepicker" formControlName="dob">
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #datepicker>
+                                      <mat-datepicker-actions>
+                                        <button mat-button matDatepickerCancel>Cancel</button>
+                                        <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                                      </mat-datepicker-actions>
+                                    </mat-datepicker>
+                                    <mat-error *ngIf="this.addUserForm.controls.dob.errors?.required
+                                      && this.addUserForm.controls.dob.invalid && (this.addUserForm.controls.dob.dirty 
+                                      || this.addUserForm.controls.dob.touched)">
+                                        Date is required
+                                    </mat-error>
+                                  </mat-form-field> -->
+                            </p>
+                            <!-- <mat-form-field>
+                                <mat-label>Date of Birth</mat-label>
+                                <input matInput formControlName="dob">
+                                <mat-datepicker-toggle matSuffix ></mat-datepicker-toggle>
+                                <mat-datepicker #dob></mat-datepicker>
+
+                                <mat-error *ngIf="this.addUserForm.controls.errors?.hasError('required')">
+                                    Valid date required.
+                                </mat-error>
+                            </mat-form-field> -->
+                            <p>
+                                <mat-form-field>
+                                    <mat-label>Enter your password</mat-label>
+                                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide"
+                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                    <mat-error
+                                        *ngIf="this.addUserForm.controls.password.hasError('required') && (this.addUserForm.controls.password.dirty || this.addUserForm.controls.password.touched)">
+                                        Password is <strong>required</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="this.addUserForm.controls.password.invalid">
+                                        Invalid Password
+                                    </mat-error>
+                                </mat-form-field>
+                            </p>
+                            <p>
+                                <mat-form-field>
+                                    <mat-label>Confirm password</mat-label>
+                                    <input matInput [type]="c_hide ? 'cpassword' : 'text'" formControlName="cpassword">
+                                    <mat-error *ngIf="this.addUserForm.controls.cpassword.hasError('required')">
+                                        Password is <strong>required</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="this.addUserForm.controls.cpassword.errors?.mustMatch">
+                                        Passwords must match
+                                    </mat-error>
+                                    <button mat-icon-button matSuffix (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                                </mat-form-field>
+                            </p>
+                            <!-- <p>
+                            <mat-form-field>
+                                <mat-label>Contact</mat-label>
+                                <input matInput formControlName="phone" placeholder="Ex.9999888765">
+                                <mat-icon matSuffix>phone_in_talk</mat-icon>
+                                <mat-hint>Hint</mat-hint>
+                            </mat-form-field>
+                        </p> -->
+                            <button mat-raised-button type="submit" [disabled]="this.addUserForm.invalid"
+                                class="submit-btn">
+                                Add User
+                            </button>
+                        </form>
+                        <!-- {{ this.addUserForm.value | json }} -->
+                    </div>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</ng-container>
